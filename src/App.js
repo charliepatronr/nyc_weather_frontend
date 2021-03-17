@@ -24,8 +24,14 @@ const options = {
 
 export default function App () {
 
+
+  
+
   const url =  'http://localhost:3000/cities'
   const [cities, setCities] = useState([])
+  const [selected, setSelected] = useState(null)
+  // console.log(selected.lat, 'LAT')
+  // console.log(selected.lon, 'LON')
 
 
   useEffect( () => {
@@ -38,14 +44,10 @@ export default function App () {
     })
   }, [])
 
+
+  
   // const renderMarkers = (cities) => {
-  //   cities.map(city => <Marker 
-  //     key={city.weather_id} 
-  //     position ={{
-  //       lat: city.lat, 
-  //       lng: city.lon
-  //     }}
-  //     />)
+
   // }
 
 
@@ -53,6 +55,13 @@ export default function App () {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   })
+
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+
   if(loadError) return "Error loading maps";
   if(!isLoaded) return  "Loading Maps"
   return(
@@ -66,20 +75,32 @@ export default function App () {
       {
         cities.map(city => (
         <Marker 
-        key={city.weather_id} 
-        position ={{
-          lat: city.lat, 
-          lng: city.lon
-        }}
+          key={city.weather_id} 
+          position ={{
+            lat: city.lat, 
+            lng: city.lon
+          }}
+          onClick = {() => {
+            setSelected(city)
+          }}
         />
-        ))
+        ))}
 
-      }
-  
+      {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lon }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h2>
+                {selected.name}
+              </h2>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
-
-
-
     </div>
 
   )
