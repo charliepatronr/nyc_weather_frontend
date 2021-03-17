@@ -1,54 +1,46 @@
-import React from "react"
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import mapStyles from "./mapStyles"
+import React, {useState, useEffect} from "react"
+import LandingPage from './LandingPage'
+import CityWeather from './CityWeather'
 
-function Map() {
+import {
+  BrowserRouter, 
+  Switch, 
+  Route, 
+} from "react-router-dom"
+
+
+function App() {
+    const url =  'http://localhost:3000/cities'
+    const [cities, setCities] = useState([])
+  
+    useEffect( () => {
+      fetch(`${url}`)
+      .then(response => response.json())
+      .then(response => {
+        setCities([...response])
+        })
+    }, [])
+
+    // create add and delete city function and pass it down ass props to landing page
+  
   return (
-    <GoogleMap
-    defaultZoom={10}
-    defaultCenter = {{lat: 40.730610 , lng: -73.935242 }}
-    />
+
+    <BrowserRouter>
+      <Switch>
+      <Route path='/weather/:id' component={CityWeather}/>
+        <Route path='/weather' 
+        render ={(props) =>(
+            <LandingPage {...props} cities={cities}/>
+        )}/>
+        <Route exact path='/' 
+        render ={(props) =>(
+            <LandingPage {...props} cities={cities}/>
+        )}/>
+        {/* ADD 404 PAGE  */}
+      </Switch>
+    </BrowserRouter>
+
   );
 }
 
-const libraries= ["places"];
-const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh'
-}
-const center = {
-  lat: 40.714272, 
-  lng: -74.005966
-}
-const options = {
-  styles : mapStyles
-}
-
-
-export default function App () {
-  const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
-  })
-  if(loadError) return "Error loading maps";
-  if(!isLoaded) return  "Loading Maps"
-  return(
-    <div>
-      <GoogleMap 
-      mapContainerStyle ={mapContainerStyle}
-      zoom={10}
-      center={center}
-      options = {options}
-
-      >
-
-      </GoogleMap>
-    </div>
-
-  )
-}
+export default App;
