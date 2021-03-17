@@ -38,8 +38,11 @@ export default function App () {
     fetch(`${url}`)
     .then(response => response.json())
     .then(response => {
-        let cities = response
-        setCities(cities)
+      console.log(typeof response)
+      let newState = [response]
+      console.log(newState)
+      setCities([...response])
+
         // renderWishes(wishes)
     })
   }, [])
@@ -73,18 +76,19 @@ export default function App () {
       options = {options}
       >
       {
-        cities.map(city => (
-        <Marker 
-          key={city.weather_id} 
-          position ={{
-            lat: city.lat, 
-            lng: city.lon
-          }}
-          onClick = {() => {
-            setSelected(city)
-          }}
-        />
-        ))}
+        cities.map(element => (
+          <Marker 
+            key={element.city.weather_id} 
+            position ={{
+              lat: element.city.lat, 
+              lng: element.city.lon
+            }}
+            onClick = {() => {
+              setSelected(element.city)
+            }}
+            
+          />))
+        }
 
       {selected ? (
           <InfoWindow
@@ -94,9 +98,10 @@ export default function App () {
             }}
           >
             <div>
-              <h2>
+              <h2 >
                 {selected.name}
               </h2>
+              <h2 onClick ={ () => console.log(selected)}> Expand </h2>
             </div>
           </InfoWindow>
         ) : null}
