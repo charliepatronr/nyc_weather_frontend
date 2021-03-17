@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import {
   GoogleMap,
   useLoadScript,
@@ -7,14 +7,6 @@ import {
 } from "@react-google-maps/api";
 import mapStyles from "./mapStyles"
 
-function Map() {
-  return (
-    <GoogleMap
-    defaultZoom={10}
-    defaultCenter = {{lat: 40.730610 , lng: -73.935242 }}
-    />
-  );
-}
 
 const libraries= ["places"];
 const mapContainerStyle = {
@@ -31,6 +23,32 @@ const options = {
 
 
 export default function App () {
+
+  const url =  'http://localhost:3000/cities'
+  const [cities, setCities] = useState([])
+
+
+  useEffect( () => {
+    fetch(`${url}`)
+    .then(response => response.json())
+    .then(response => {
+        let cities = response
+        setCities(cities)
+        // renderWishes(wishes)
+    })
+  }, [])
+
+  // const renderMarkers = (cities) => {
+  //   cities.map(city => <Marker 
+  //     key={city.weather_id} 
+  //     position ={{
+  //       lat: city.lat, 
+  //       lng: city.lon
+  //     }}
+  //     />)
+  // }
+
+
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -44,10 +62,24 @@ export default function App () {
       zoom={10}
       center={center}
       options = {options}
-
       >
+      {
+        cities.map(city => (
+        <Marker 
+        key={city.weather_id} 
+        position ={{
+          lat: city.lat, 
+          lng: city.lon
+        }}
+        />
+        ))
 
+      }
+  
       </GoogleMap>
+
+
+
     </div>
 
   )
