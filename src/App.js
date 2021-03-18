@@ -26,8 +26,14 @@ function App() {
   return (
 
     <BrowserRouter>
+  
       <Switch>
-      <Route path='/weather/:id' component={CityWeather}/>
+        {/* MUST PASS ALL STATE TO CITY WEATHER COMPONENT SINCE I CANT KNOW WHICH CITY WILL BE RENDERED 
+        OTHER OPTION IS TO MAKE API CALL WITH THE WEATER_ID IN URL FOR THAT SPECIFIC CITY */}
+        <Route path='/weather/:id' 
+          render ={(props) =>(
+          <CityWeather {...props} cities={cities}/>
+        )}/>
         <Route path='/weather' 
         render ={(props) =>(
             <LandingPage {...props} cities={cities}/>
