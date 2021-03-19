@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
-import LandingPage from './LandingPage'
+// import LandingPage from './LandingPage'
+import LandingPage2 from './LandingPage2'
 import WeatherContainer from './WeatherContainer'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -40,11 +41,11 @@ function App() {
         )}/>
         <Route path='/weather' 
         render ={(props) =>(
-            <LandingPage {...props} cities={cities}/>
+            <LandingPage2 {...props} cities={cities}/>
         )}/>
         <Route exact path='/' 
         render ={(props) =>(
-            <LandingPage {...props} cities={cities}/>
+            <LandingPage2 {...props} cities={cities}/>
         )}/>
         {/* ADD 404 PAGE  */}
       </Switch>
