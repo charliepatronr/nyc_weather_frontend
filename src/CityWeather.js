@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom"
 import { Grid, Image, Card, Segment, Container, Header } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Forecast from './Forecast'
 
 
 import {
@@ -13,13 +14,16 @@ import {
     faSun,
     faSmog,
   } from '@fortawesome/free-solid-svg-icons';
+import { render } from '@testing-library/react';
 
  export default function CityWeather (props) {
-    
-    const {id, name} = props.city.city
-    const {wind_speed, dt, humidity, temp,  } = props.city.city.weather.current
-    const {main} = props.city.city.weather.current.weather[0]
-    const {min, max} = props.city.city.weather.daily[0].temp
+    const {...city} = props.city.city
+    const {id, name} = city
+    const {wind_speed, dt, humidity, temp,  } = city.weather.current
+    const {main, description } = city.weather.current.weather[0]
+    const {min, max} = city.weather.daily[0].temp
+    const [...daily] = city.weather.daily
+
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = [
         'January',
@@ -35,121 +39,87 @@ import {
         'Nocvember',
         'December',
       ];
+
       const currentDate = new Date();
       const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${
         months[currentDate.getMonth()]
       }`;
 
-      let weatherIcon = null;
-      console.log(main, 'MAIN')
-
-    //   if (main === 'Thunderstorm') {
-    //     weatherIcon = <Icon className="fa fa-bolt" />;
-    //   } else if (main === 'Drizzle') {
-    //     weatherIcon = <Icon className="fa fa-cloud-rain" />;
-    //   } else if (main === 'Rain') {
-    //     weatherIcon = <Icon className="fa fa-cloud-showers-heavy" />;
-    //   } else if (main === 'Snow') {
-    //     weatherIcon = <Icon className="fa fa-snowflake" />;
-    //   } else if (main === 'Clear') {
-    //     weatherIcon = <Icon className="fa fa-sun"/>;
-    //   } else if (main === 'Clouds') {
-    //     weatherIcon = <Icon className="fa fa-cloud" />;
-    //   } else {
-    //     weatherIcon = <Icon className="fa fas fa-smog" />;
-    //   }
-    //     //tornado is font aw pro icon
-    //     // else if (main === 'Tornado') {
-    //     // weatherIcon = <Icon className="fas fa-cloud" />;
+    let weatherIcon = null;
 
     if (main === 'Thunderstorm') {
-        weatherIcon = <FontAwesomeIcon  icon={faBolt} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon  icon={faBolt} color="white" size="10x"/>;
       } else if (main === 'Drizzle') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudRain} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloudRain} color="white" size="10x"/>;
       } else if (main === 'Rain') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} color="white" size="10x"/>;
       } else if (main === 'Snow') {
-        weatherIcon = <FontAwesomeIcon icon={faSnowflake} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSnowflake} color="white" size="10x"/>;
       } else if (main === 'Clear') {
-        weatherIcon = <FontAwesomeIcon icon={faSun} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSun} color="white" size="10x"/>;
       } else if (main === 'Clouds') {
-        weatherIcon = <FontAwesomeIcon icon={faCloud} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloud} color="white" size="10x"/>;
       } else {
-        weatherIcon = <FontAwesomeIcon icon={faSmog} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSmog} color="white" size="10x"/>;
       }
    
+    console.log(daily, "DAILY FORECAST")
 
-    console.log(props, "PROPS IN CITY QWEATHER")
     
 
-    // const useStyles = makeStyles((theme) => ({
-    //     root: {
-    //       flexGrow: 1,
+    const sunset = new Date(props.city.city.weather.current.sunset * 1000).toLocaleTimeString('en-IN')
+    const sunrise = new Date(props.city.city.weather.current.sunrise * 1000).toLocaleTimeString('en-IN');
 
-    //     },
-    //     paper: {
-    //       padding: theme.spacing(2),
-    //       textAlign: 'center',
-    //       color: theme.palette.text.secondary,
-    //     },
-    //     bullet: {
-    //         display: 'inline-block',
-    //         margin: '0 2px',
-    //         transform: 'scale(0.8)',
-    //       },
-    //       title: {
-    //         fontSize: 14,
-    //       },
-    //       pos: {
-    //         marginBottom: 12,
-    //       },
-    //       marginAutoContainer: {
-    //         width: '100vw',
-    //         height: '100vh',
-    //         display: 'flex',
-    //         backgroundColor: 'orange',
-    //       },
-    //       marginAutoItem: {
-    //         margin: 'auto'
-    //       },
-    //       weatherCard : {
-    //         height: "100%",
+    const renderForecast = (daily) => {
+        return daily.map(element => <Forecast key={element.dt} forecast={element}/>)
+    }
 
-    //       }
-        
-    //   }));
-      
-    //   const classes = useStyles();
-    //   console.log(props.weather)
-
-      const sunset = new Date(props.city.city.weather.current.sunset * 1000).toLocaleTimeString('en-IN')
-      const sunrise = new Date(props.city.city.weather.current.sunrise * 1000).toLocaleTimeString('en-IN');
+    console.log(renderForecast(daily), 'FORECAST MAP')
     
 
 
 
     return (
       <div  >
-        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
-          <Grid.Row >
-            <Grid columns={1}>
+        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle' >
+
+
+          <Grid.Row stretch >
+            <Grid columns={2} textAlign='left'>
               <Grid.Column>
+              <Card fluid className="currentWeather">
+                  <Card.Content>
+                    <Card.Header>
+                        {name}
+                    </Card.Header>
+                    <Card.Description>
+                        {date}
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
               </Grid.Column>
+              <Grid.Column>
+
+              </Grid.Column>
+              
             </Grid>
           </Grid.Row>
+
 
           <Grid.Row >
             <Grid columns={2}>
 
               
               <Grid.Row stretched>
+
               <Grid.Column >
 
                 <Card fluid className="currentWeather">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                      {weatherIcon}
+                      {temp}&#176;
+                      {description}
+
                   </Card.Content>
                 </Card>
                 </Grid.Column>
@@ -162,19 +132,21 @@ import {
                     <Grid.Column>
                       <Card className="forecast">
                         <Card.Content>
-                          <Card.Header content='Jake Smith' />
-                          <Card.Meta content='Musicians' />
-                          <Card.Description content='Jake is a drummer living in New York.' />
+                          <Card.Description>
+                            <div>{max}&#176; </div>
+                            <div> High</div>
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
 
                     <Grid.Column>
                       <Card className="forecast">
-                        <Card.Content>
-                          <Card.Header content='Jake Smith' />
-                          <Card.Meta content='Musicians' />
-                          <Card.Description content='Jake is a drummer living in New York.' />
+                      <Card.Content>
+                          <Card.Description>
+                            <div>{wind_speed} mph </div>
+                            <div> Wind</div>
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
@@ -182,10 +154,11 @@ import {
 
                     <Grid.Column>
                       <Card className="forecast">
-                        <Card.Content>
-                          <Card.Header content='Jake Smith' />
-                          <Card.Meta content='Musicians' />
-                          <Card.Description content='Jake is a drummer living in New York.' />
+                      <Card.Content>
+                          <Card.Description>
+                            <div>{sunrise} </div>
+                            <div> Sunrise</div>
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
@@ -195,117 +168,47 @@ import {
                   <Grid.Row>
                   <Grid.Column>
                     <Card className="forecast">
-                      <Card.Content>
-                        <Card.Header content='Jake Smith' />
-                        <Card.Meta content='Musicians' />
-                        <Card.Description content='Jake is a drummer living in New York.' />
-                      </Card.Content>
+                        <Card.Content>
+                            <Card.Description>
+                                <div>{min}&#176; </div>
+                                <div> Low</div>
+                            </Card.Description>
+                        </Card.Content>
                     </Card>
                   </Grid.Column>
                   <Grid.Column>
                     <Card className="forecast">
-                      <Card.Content>
-                        <Card.Header content='Jake Smith' />
-                        <Card.Meta content='Musicians' />
-                        <Card.Description content='Jake is a drummer living in New York.' />
-                      </Card.Content>
-                    </Card>
+                        <Card.Content>
+                                <Card.Description>
+                                    <div>{humidity} % </div>
+                                    <div> Rain </div>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
                   </Grid.Column>
                   <Grid.Column>
                     <Card className="forecast">
-                      <Card.Content>
-                        <Card.Header content='Jake Smith' />
-                        <Card.Meta content='Musicians' />
-                        <Card.Description content='Jake is a drummer living in New York.' />
-                      </Card.Content>
+                    <Card.Content>
+                          <Card.Description>
+                            <div>{sunset} </div>
+                            <div> Sunset</div>
+                          </Card.Description>
+                        </Card.Content>
                     </Card>
                   </Grid.Column>
-
                   </Grid.Row>
                 </Grid>
-
                 </Grid.Column>
-
               </Grid.Row>
-
-
-
-
 
             </Grid>
           </Grid.Row>
 
-
-
-            
-  
         </Grid>
 
         <Grid.Row >
-          <Grid columns={7}>
-            <Grid.Column>
-              <Card className="forecast">
-                <Card.Content>
-                  <Card.Header content='Jake Smith' />
-                  <Card.Meta content='Musicians' />
-                  <Card.Description content='Jake is a drummer living in New York.' />
-                </Card.Content>
-              </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
+            <Grid columns={8}>
+                {renderForecast(daily)}
             </Grid>
           </Grid.Row>
 
