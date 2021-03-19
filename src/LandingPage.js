@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import {
   GoogleMap,
   useLoadScript,
@@ -104,7 +104,7 @@ export default function LandingPage (props) {
               <h2 >
                 {selected.name}
               </h2>
-              <h2 onClick ={ () => props.history.push(`/weather/${selected.id}`)}> Expand </h2>
+              <h2 onClick ={ () => props.history.push(`/weather/${selected.weather_id}`)}> Expand </h2>
             </div>
           </InfoWindow>
         ) : null}

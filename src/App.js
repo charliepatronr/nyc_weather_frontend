@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import LandingPage from './LandingPage'
-import CityWeather from './CityWeather'
+import WeatherContainer from './WeatherContainer'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import {
   BrowserRouter, 
@@ -26,8 +27,14 @@ function App() {
   return (
 
     <BrowserRouter>
+  
       <Switch>
-      <Route path='/weather/:id' component={CityWeather}/>
+        {/* MUST PASS ALL STATE TO CITY WEATHER COMPONENT SINCE I CANT KNOW WHICH CITY WILL BE RENDERED 
+        OTHER OPTION IS TO MAKE API CALL WITH THE WEATER_ID IN URL FOR THAT SPECIFIC CITY */}
+        <Route path='/weather/:id' 
+          render ={(props) =>(
+          <WeatherContainer {...props} cities={cities}/>
+        )}/>
         <Route path='/weather' 
         render ={(props) =>(
             <LandingPage {...props} cities={cities}/>
@@ -38,6 +45,7 @@ function App() {
         )}/>
         {/* ADD 404 PAGE  */}
       </Switch>
+      <CssBaseline/>
     </BrowserRouter>
 
   );
