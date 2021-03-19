@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom"
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Segment } from 'semantic-ui-react'
 import CityWeather from './CityWeather'
+// import background from "./assets/weather.jpg";
+
 
 
 
@@ -25,12 +25,12 @@ export default function WeatherContainer (props) {
 
 
     return (
-        <div>
-            {currentCity ? 
-                <CityWeather city={currentCity}/>
-                : 
-                <div> ADD LOADING PAGE</div>
-            }
+      <div className='weatherContainer'> 
+          {currentCity ? 
+                    <CityWeather city={currentCity}/>
+                    : 
+                    <div> ADD LOADING PAGE</div>
+                }
       </div>
     )
 
