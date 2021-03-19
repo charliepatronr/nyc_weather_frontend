@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from "react"
 import LandingPage from './LandingPage'
 import WeatherContainer from './WeatherContainer'
-import CssBaseline from '@material-ui/core/CssBaseline';
+import 'semantic-ui-css/semantic.min.css'
+import './App.css';
+
+
 
 import {
   BrowserRouter, 
@@ -45,7 +48,6 @@ function App() {
         )}/>
         {/* ADD 404 PAGE  */}
       </Switch>
-      <CssBaseline/>
     </BrowserRouter>
 
   );

@@ -1,15 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom"
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core'
-import Icon from '@material-ui/core/Icon';
+import { Grid, Image, Card, Segment, Container, Header } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 import {
     faCloud,
@@ -21,11 +14,7 @@ import {
     faSmog,
   } from '@fortawesome/free-solid-svg-icons';
 
-
-
-
-
-export default function CityWeather (props) {
+ export default function CityWeather (props) {
     
     const {id, name} = props.city.city
     const {wind_speed, dt, humidity, temp,  } = props.city.city.weather.current
@@ -74,63 +63,63 @@ export default function CityWeather (props) {
     //     // weatherIcon = <Icon className="fas fa-cloud" />;
 
     if (main === 'Thunderstorm') {
-        weatherIcon = <FontAwesomeIcon  icon={faBolt} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon  icon={faBolt} size="10x"/>;
       } else if (main === 'Drizzle') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudRain} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloudRain} size="10x"/>;
       } else if (main === 'Rain') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} size="10x"/>;
       } else if (main === 'Snow') {
-        weatherIcon = <FontAwesomeIcon icon={faSnowflake} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSnowflake} size="10x"/>;
       } else if (main === 'Clear') {
-        weatherIcon = <FontAwesomeIcon icon={faSun} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSun} size="10x"/>;
       } else if (main === 'Clouds') {
-        weatherIcon = <FontAwesomeIcon icon={faCloud} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloud} size="10x"/>;
       } else {
-        weatherIcon = <FontAwesomeIcon icon={faSmog} size="70px"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSmog} size="10x"/>;
       }
    
 
     console.log(props, "PROPS IN CITY QWEATHER")
     
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-          flexGrow: 1,
+    // const useStyles = makeStyles((theme) => ({
+    //     root: {
+    //       flexGrow: 1,
 
-        },
-        paper: {
-          padding: theme.spacing(2),
-          textAlign: 'center',
-          color: theme.palette.text.secondary,
-        },
-        bullet: {
-            display: 'inline-block',
-            margin: '0 2px',
-            transform: 'scale(0.8)',
-          },
-          title: {
-            fontSize: 14,
-          },
-          pos: {
-            marginBottom: 12,
-          },
-          marginAutoContainer: {
-            width: '100vw',
-            height: '100vh',
-            display: 'flex',
-            backgroundColor: 'orange',
-          },
-          marginAutoItem: {
-            margin: 'auto'
-          },
-          weatherCard : {
-            height: "100%",
+    //     },
+    //     paper: {
+    //       padding: theme.spacing(2),
+    //       textAlign: 'center',
+    //       color: theme.palette.text.secondary,
+    //     },
+    //     bullet: {
+    //         display: 'inline-block',
+    //         margin: '0 2px',
+    //         transform: 'scale(0.8)',
+    //       },
+    //       title: {
+    //         fontSize: 14,
+    //       },
+    //       pos: {
+    //         marginBottom: 12,
+    //       },
+    //       marginAutoContainer: {
+    //         width: '100vw',
+    //         height: '100vh',
+    //         display: 'flex',
+    //         backgroundColor: 'orange',
+    //       },
+    //       marginAutoItem: {
+    //         margin: 'auto'
+    //       },
+    //       weatherCard : {
+    //         height: "100%",
 
-          }
+    //       }
         
-      }));
+    //   }));
       
-      const classes = useStyles();
+    //   const classes = useStyles();
     //   console.log(props.weather)
 
       const sunset = new Date(props.city.city.weather.current.sunset * 1000).toLocaleTimeString('en-IN')
@@ -140,129 +129,188 @@ export default function CityWeather (props) {
 
 
     return (
-        <div className={classes.marginAutoContainer}>
-            <div className={classes.marginAutoItem}>
-            <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-
-                <Grid item xs ={6}>
-                    <Paper className={classes.paper}>
-                        <div>{name}</div>
-                        <div>{date}</div>
-
-                    </Paper>
-                </Grid>
-                
-                <Grid container item xs={12} spacing={1}>
-  
-                        <Grid item xs>
-                            <Card className={classes.root} variant="outlined" style={{}}>
-                                <CardContent>
-                                    <Icon  style={{ fontSize: 70 }}>
-                                    {weatherIcon}
-                                    </Icon>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                      
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        ICON
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    
-                    <Grid container item xs spacing={1}>
-                        <Grid item xs = {4}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                       {max}&#176;
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        High
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs = {4}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        {wind_speed}mph
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                       Wind
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs = {4}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        {sunrise}
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Sunrise
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs = {4}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                       {min}&#176;
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                       Low
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs = {4}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        {humidity}%
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Rain
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs = {4}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        {sunset}
-                                    </Typography>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Sunset
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>            
-                </Grid>
-                </Grid>
-
-
-                
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>FORECAST</Paper>
-                </Grid>
+      <div  >
+        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
+          <Grid.Row >
+            <Grid columns={1}>
+              <Grid.Column>
+              </Grid.Column>
             </Grid>
+          </Grid.Row>
+
+          <Grid.Row >
+            <Grid columns={2}>
+
+              
+              <Grid.Row stretched>
+              <Grid.Column >
+
+                <Card fluid className="currentWeather">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+                </Grid.Column>
+
+                <Grid.Column>
+
+                <Grid columns={3}>
+
+                  <Grid.Row> 
+                    <Grid.Column>
+                      <Card className="forecast">
+                        <Card.Content>
+                          <Card.Header content='Jake Smith' />
+                          <Card.Meta content='Musicians' />
+                          <Card.Description content='Jake is a drummer living in New York.' />
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card className="forecast">
+                        <Card.Content>
+                          <Card.Header content='Jake Smith' />
+                          <Card.Meta content='Musicians' />
+                          <Card.Description content='Jake is a drummer living in New York.' />
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+
+                    <Grid.Column>
+                      <Card className="forecast">
+                        <Card.Content>
+                          <Card.Header content='Jake Smith' />
+                          <Card.Meta content='Musicians' />
+                          <Card.Description content='Jake is a drummer living in New York.' />
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                  </Grid.Row>
+
+                  <Grid.Row>
+                  <Grid.Column>
+                    <Card className="forecast">
+                      <Card.Content>
+                        <Card.Header content='Jake Smith' />
+                        <Card.Meta content='Musicians' />
+                        <Card.Description content='Jake is a drummer living in New York.' />
+                      </Card.Content>
+                    </Card>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Card className="forecast">
+                      <Card.Content>
+                        <Card.Header content='Jake Smith' />
+                        <Card.Meta content='Musicians' />
+                        <Card.Description content='Jake is a drummer living in New York.' />
+                      </Card.Content>
+                    </Card>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Card className="forecast">
+                      <Card.Content>
+                        <Card.Header content='Jake Smith' />
+                        <Card.Meta content='Musicians' />
+                        <Card.Description content='Jake is a drummer living in New York.' />
+                      </Card.Content>
+                    </Card>
+                  </Grid.Column>
+
+                  </Grid.Row>
+                </Grid>
+
+                </Grid.Column>
+
+              </Grid.Row>
+
+
+
+
+
+            </Grid>
+          </Grid.Row>
+
+
+
+            
+  
+        </Grid>
+
+        <Grid.Row >
+          <Grid columns={7}>
+            <Grid.Column>
+              <Card className="forecast">
+                <Card.Content>
+                  <Card.Header content='Jake Smith' />
+                  <Card.Meta content='Musicians' />
+                  <Card.Description content='Jake is a drummer living in New York.' />
+                </Card.Content>
+              </Card>
+              </Grid.Column>
+              <Grid.Column>
+                <Card className="forecast">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column>
+                <Card className="forecast">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column>
+                <Card className="forecast">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column>
+                <Card className="forecast">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column>
+                <Card className="forecast">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column>
+                <Card className="forecast">
+                  <Card.Content>
+                    <Card.Header content='Jake Smith' />
+                    <Card.Meta content='Musicians' />
+                    <Card.Description content='Jake is a drummer living in New York.' />
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+            </Grid>
+          </Grid.Row>
+
       </div>
 
-            </div>
-            
-
-        </div>
-        
     )
 
 }
