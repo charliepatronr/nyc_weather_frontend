@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import LandingPage from './LandingPage'
-import CityWeather from './CityWeather'
+import WeatherContainer from './WeatherContainer'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import {
   BrowserRouter, 
@@ -32,7 +33,7 @@ function App() {
         OTHER OPTION IS TO MAKE API CALL WITH THE WEATER_ID IN URL FOR THAT SPECIFIC CITY */}
         <Route path='/weather/:id' 
           render ={(props) =>(
-          <CityWeather {...props} cities={cities}/>
+          <WeatherContainer {...props} cities={cities}/>
         )}/>
         <Route path='/weather' 
         render ={(props) =>(
@@ -44,6 +45,7 @@ function App() {
         )}/>
         {/* ADD 404 PAGE  */}
       </Switch>
+      <CssBaseline/>
     </BrowserRouter>
 
   );
