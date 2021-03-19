@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom"
 import { Grid, Image, Card, Segment, Container, Header } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Forecast from './Forecast'
 
 
 import {
@@ -13,13 +14,16 @@ import {
     faSun,
     faSmog,
   } from '@fortawesome/free-solid-svg-icons';
+import { render } from '@testing-library/react';
 
  export default function CityWeather (props) {
-    
-    const {id, name} = props.city.city
-    const {wind_speed, dt, humidity, temp,  } = props.city.city.weather.current
-    const {main, description } = props.city.city.weather.current.weather[0]
-    const {min, max} = props.city.city.weather.daily[0].temp
+    const {...city} = props.city.city
+    const {id, name} = city
+    const {wind_speed, dt, humidity, temp,  } = city.weather.current
+    const {main, description } = city.weather.current.weather[0]
+    const {min, max} = city.weather.daily[0].temp
+    const [...daily] = city.weather.daily
+
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = [
         'January',
@@ -35,55 +39,42 @@ import {
         'Nocvember',
         'December',
       ];
+
       const currentDate = new Date();
       const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${
         months[currentDate.getMonth()]
       }`;
 
-      let weatherIcon = null;
-      console.log(main, 'MAIN')
-
-    //   if (main === 'Thunderstorm') {
-    //     weatherIcon = <Icon className="fa fa-bolt" />;
-    //   } else if (main === 'Drizzle') {
-    //     weatherIcon = <Icon className="fa fa-cloud-rain" />;
-    //   } else if (main === 'Rain') {
-    //     weatherIcon = <Icon className="fa fa-cloud-showers-heavy" />;
-    //   } else if (main === 'Snow') {
-    //     weatherIcon = <Icon className="fa fa-snowflake" />;
-    //   } else if (main === 'Clear') {
-    //     weatherIcon = <Icon className="fa fa-sun"/>;
-    //   } else if (main === 'Clouds') {
-    //     weatherIcon = <Icon className="fa fa-cloud" />;
-    //   } else {
-    //     weatherIcon = <Icon className="fa fas fa-smog" />;
-    //   }
-    //     //tornado is font aw pro icon
-    //     // else if (main === 'Tornado') {
-    //     // weatherIcon = <Icon className="fas fa-cloud" />;
+    let weatherIcon = null;
 
     if (main === 'Thunderstorm') {
-        weatherIcon = <FontAwesomeIcon  icon={faBolt} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon  icon={faBolt} color="white" size="10x"/>;
       } else if (main === 'Drizzle') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudRain} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloudRain} color="white" size="10x"/>;
       } else if (main === 'Rain') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} color="white" size="10x"/>;
       } else if (main === 'Snow') {
-        weatherIcon = <FontAwesomeIcon icon={faSnowflake} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSnowflake} color="white" size="10x"/>;
       } else if (main === 'Clear') {
-        weatherIcon = <FontAwesomeIcon icon={faSun} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSun} color="white" size="10x"/>;
       } else if (main === 'Clouds') {
-        weatherIcon = <FontAwesomeIcon icon={faCloud} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faCloud} color="white" size="10x"/>;
       } else {
-        weatherIcon = <FontAwesomeIcon icon={faSmog} size="10x"/>;
+        weatherIcon = <FontAwesomeIcon icon={faSmog} color="white" size="10x"/>;
       }
    
+    console.log(daily, "DAILY FORECAST")
 
-    console.log(props, "PROPS IN CITY QWEATHER")
     
 
-      const sunset = new Date(props.city.city.weather.current.sunset * 1000).toLocaleTimeString('en-IN')
-      const sunrise = new Date(props.city.city.weather.current.sunrise * 1000).toLocaleTimeString('en-IN');
+    const sunset = new Date(props.city.city.weather.current.sunset * 1000).toLocaleTimeString('en-IN')
+    const sunrise = new Date(props.city.city.weather.current.sunrise * 1000).toLocaleTimeString('en-IN');
+
+    const renderForecast = (daily) => {
+        return daily.map(element => <Forecast key={element.dt} forecast={element}/>)
+    }
+
+    console.log(renderForecast(daily), 'FORECAST MAP')
     
 
 
@@ -205,120 +196,19 @@ import {
                         </Card.Content>
                     </Card>
                   </Grid.Column>
-
                   </Grid.Row>
                 </Grid>
-
                 </Grid.Column>
-
               </Grid.Row>
-
-
-
-
 
             </Grid>
           </Grid.Row>
 
-
-
-            
-  
         </Grid>
 
         <Grid.Row >
-          <Grid columns={7}>
-            <Grid.Column>
-              <Card className="forecast">
-                <Card.Content>
-                  <Card.Header>
-
-                  </Card.Header>
-                  <Card.Meta content='Weather' />
-                  <Card.Description>
-
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header>
-
-                    </Card.Header>
-                    <Card.Meta content='Weather' />
-                    <Card.Description>
-
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header>
-
-                    </Card.Header>
-                    <Card.Meta content='Weather' />
-                    <Card.Description>
-
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header>
-
-                    </Card.Header>
-                    <Card.Meta content='Weather' />
-                    <Card.Description>
-
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header>
-
-                    </Card.Header>
-                    <Card.Meta content='Weather' />
-                    <Card.Description>
-
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header>
-
-                    </Card.Header>
-                    <Card.Meta content='Weather' />
-                    <Card.Description>
-
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <Card className="forecast">
-                  <Card.Content>
-                    <Card.Header>
-
-                    </Card.Header>
-                    <Card.Meta content='Weather' />
-                    <Card.Description>
-
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
+            <Grid columns={8}>
+                {renderForecast(daily)}
             </Grid>
           </Grid.Row>
 
