@@ -18,7 +18,7 @@ import {
     
     const {id, name} = props.city.city
     const {wind_speed, dt, humidity, temp,  } = props.city.city.weather.current
-    const {main} = props.city.city.weather.current.weather[0]
+    const {main, description } = props.city.city.weather.current.weather[0]
     const {min, max} = props.city.city.weather.daily[0].temp
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = [
@@ -82,46 +82,6 @@ import {
     console.log(props, "PROPS IN CITY QWEATHER")
     
 
-    // const useStyles = makeStyles((theme) => ({
-    //     root: {
-    //       flexGrow: 1,
-
-    //     },
-    //     paper: {
-    //       padding: theme.spacing(2),
-    //       textAlign: 'center',
-    //       color: theme.palette.text.secondary,
-    //     },
-    //     bullet: {
-    //         display: 'inline-block',
-    //         margin: '0 2px',
-    //         transform: 'scale(0.8)',
-    //       },
-    //       title: {
-    //         fontSize: 14,
-    //       },
-    //       pos: {
-    //         marginBottom: 12,
-    //       },
-    //       marginAutoContainer: {
-    //         width: '100vw',
-    //         height: '100vh',
-    //         display: 'flex',
-    //         backgroundColor: 'orange',
-    //       },
-    //       marginAutoItem: {
-    //         margin: 'auto'
-    //       },
-    //       weatherCard : {
-    //         height: "100%",
-
-    //       }
-        
-    //   }));
-      
-    //   const classes = useStyles();
-    //   console.log(props.weather)
-
       const sunset = new Date(props.city.city.weather.current.sunset * 1000).toLocaleTimeString('en-IN')
       const sunrise = new Date(props.city.city.weather.current.sunrise * 1000).toLocaleTimeString('en-IN');
     
@@ -130,26 +90,45 @@ import {
 
     return (
       <div  >
-        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
-          <Grid.Row >
-            <Grid columns={1}>
+        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle' >
+
+
+          <Grid.Row stretch >
+            <Grid columns={2} textAlign='left'>
               <Grid.Column>
+              <Card fluid className="currentWeather">
+                  <Card.Content>
+                    <Card.Header>
+                        {name}
+                    </Card.Header>
+                    <Card.Description>
+                        {date}
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
               </Grid.Column>
+              <Grid.Column>
+
+              </Grid.Column>
+              
             </Grid>
           </Grid.Row>
+
 
           <Grid.Row >
             <Grid columns={2}>
 
               
               <Grid.Row stretched>
+
               <Grid.Column >
 
                 <Card fluid className="currentWeather">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                      {weatherIcon}
+                      {temp}&#176;
+                      {description}
+
                   </Card.Content>
                 </Card>
                 </Grid.Column>
@@ -162,19 +141,21 @@ import {
                     <Grid.Column>
                       <Card className="forecast">
                         <Card.Content>
-                          <Card.Header content='Jake Smith' />
-                          <Card.Meta content='Musicians' />
-                          <Card.Description content='Jake is a drummer living in New York.' />
+                          <Card.Description>
+                            <div>{max}&#176; </div>
+                            <div> High</div>
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
 
                     <Grid.Column>
                       <Card className="forecast">
-                        <Card.Content>
-                          <Card.Header content='Jake Smith' />
-                          <Card.Meta content='Musicians' />
-                          <Card.Description content='Jake is a drummer living in New York.' />
+                      <Card.Content>
+                          <Card.Description>
+                            <div>{wind_speed} mph </div>
+                            <div> Wind</div>
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
@@ -182,10 +163,11 @@ import {
 
                     <Grid.Column>
                       <Card className="forecast">
-                        <Card.Content>
-                          <Card.Header content='Jake Smith' />
-                          <Card.Meta content='Musicians' />
-                          <Card.Description content='Jake is a drummer living in New York.' />
+                      <Card.Content>
+                          <Card.Description>
+                            <div>{sunrise} </div>
+                            <div> Sunrise</div>
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
@@ -195,29 +177,32 @@ import {
                   <Grid.Row>
                   <Grid.Column>
                     <Card className="forecast">
-                      <Card.Content>
-                        <Card.Header content='Jake Smith' />
-                        <Card.Meta content='Musicians' />
-                        <Card.Description content='Jake is a drummer living in New York.' />
-                      </Card.Content>
+                        <Card.Content>
+                            <Card.Description>
+                                <div>{min}&#176; </div>
+                                <div> Low</div>
+                            </Card.Description>
+                        </Card.Content>
                     </Card>
                   </Grid.Column>
                   <Grid.Column>
                     <Card className="forecast">
-                      <Card.Content>
-                        <Card.Header content='Jake Smith' />
-                        <Card.Meta content='Musicians' />
-                        <Card.Description content='Jake is a drummer living in New York.' />
-                      </Card.Content>
-                    </Card>
+                        <Card.Content>
+                                <Card.Description>
+                                    <div>{humidity} % </div>
+                                    <div> Rain </div>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
                   </Grid.Column>
                   <Grid.Column>
                     <Card className="forecast">
-                      <Card.Content>
-                        <Card.Header content='Jake Smith' />
-                        <Card.Meta content='Musicians' />
-                        <Card.Description content='Jake is a drummer living in New York.' />
-                      </Card.Content>
+                    <Card.Content>
+                          <Card.Description>
+                            <div>{sunset} </div>
+                            <div> Sunset</div>
+                          </Card.Description>
+                        </Card.Content>
                     </Card>
                   </Grid.Column>
 
@@ -246,63 +231,91 @@ import {
             <Grid.Column>
               <Card className="forecast">
                 <Card.Content>
-                  <Card.Header content='Jake Smith' />
-                  <Card.Meta content='Musicians' />
-                  <Card.Description content='Jake is a drummer living in New York.' />
+                  <Card.Header>
+
+                  </Card.Header>
+                  <Card.Meta content='Weather' />
+                  <Card.Description>
+
+                  </Card.Description>
                 </Card.Content>
               </Card>
               </Grid.Column>
               <Grid.Column>
                 <Card className="forecast">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                    <Card.Header>
+
+                    </Card.Header>
+                    <Card.Meta content='Weather' />
+                    <Card.Description>
+
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column>
                 <Card className="forecast">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                    <Card.Header>
+
+                    </Card.Header>
+                    <Card.Meta content='Weather' />
+                    <Card.Description>
+
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column>
                 <Card className="forecast">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                    <Card.Header>
+
+                    </Card.Header>
+                    <Card.Meta content='Weather' />
+                    <Card.Description>
+
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column>
                 <Card className="forecast">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                    <Card.Header>
+
+                    </Card.Header>
+                    <Card.Meta content='Weather' />
+                    <Card.Description>
+
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column>
                 <Card className="forecast">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                    <Card.Header>
+
+                    </Card.Header>
+                    <Card.Meta content='Weather' />
+                    <Card.Description>
+
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column>
                 <Card className="forecast">
                   <Card.Content>
-                    <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
-                    <Card.Description content='Jake is a drummer living in New York.' />
+                    <Card.Header>
+
+                    </Card.Header>
+                    <Card.Meta content='Weather' />
+                    <Card.Description>
+
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </Grid.Column>
