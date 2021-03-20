@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import Map from './Map'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import About from './About'
+
 import {
   Button,
   Container,
@@ -17,9 +19,6 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
-import {
-  faLinkedin,
-} from '@fortawesome/free-solid-svg-icons';
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -28,11 +27,6 @@ const { MediaContextProvider, Media } = createMedia({
     computer: 1024,
   },
 })
-
-/* Heads up!
- * HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled
- * components for such things.
- */
 
  //Heading 
 const HomepageHeading = ({ mobile }) => (
@@ -62,41 +56,9 @@ const HomepageHeading = ({ mobile }) => (
               
             </p>
             <p>For more details on the application's architecture click on <strong>About</strong> in the nav bar.</p>
-
-{/* 
-
-            <p style={{ fontSize: '1emm' }}>
-              The application's architecture includes a Ruby on Rails API backend with a PostgreSQL db which allows us to store
-              the cities we want to display and add new cities with usage. 
-              On the frontend the application uses React using functional components and hooks for scalability.
-            </p>
-          </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-              <p style={{ fontSize: '1emm' }}>
-                Lastly this application uses the Google Maps API to render the current cities we want to display the 
-                weather for more easily for the end user.
-            </p>
-            <p style={{ fontSize: '1emm' }}>
-                I would like to thank Karen, Cristian and Christopher for the interview process and hopefully you find 
-                the application built useful. 
-            </p> */}
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    {/* <Header
-      as='h2'
-      content='Do whatever you want when you want to.'
-      inverted
-      style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
-      }}
-    /> */}
-    {/* <Button primary size='huge'>
-      Get Started
-      <Icon name='right arrow' />
-    </Button> */}
   </Container>
 )
 
@@ -104,17 +66,16 @@ HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
 }
 
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
-
  //Desktop Nav bar and container
 class DesktopContainer extends Component {
-  state = {}
+    state = {}
+
+
+
 
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
+
 
   render() {
     const { children } = this.props
@@ -131,7 +92,7 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign='center'
-            style={{ minHeight: 500, padding: '1em 0em' }}
+            style={{ minHeight: this.props.size, padding: '1em 0em' }}
             vertical
           >
             <Menu
@@ -142,17 +103,39 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item as='a' active position='left'>
+                <Menu.Item as='a' 
+                active={!this.props.about} 
+                position='left'
+                onClick ={() => {this.props.showHome()}}
+                >
                   Home
                 </Menu.Item>
-                <Menu.Item as='a'>About</Menu.Item>
-                <Menu.Item as='a'>Linkedin</Menu.Item>
-                <Menu.Item as='a'>Portfolio</Menu.Item>
-                <Menu.Item as='a'>Github</Menu.Item>
+                <Menu.Item as='a'
+                active={this.props.about} 
+                onClick= {() =>this.props.showAbout() }
+                >
+                  About
+                  </Menu.Item>
+                <Menu.Item 
+                  href="https://www.linkedin.com/in/juan-carlos-patron/"
+                  target="_blank">
+                    Linkedin
+                  </Menu.Item>
+                <Menu.Item as='a'
+                  href="https://jcpatronr.com"
+                  target="_blank">
+                  Portfolio
+                  </Menu.Item>
+                <Menu.Item as='a'
+                  href="https://github.com/charliepatronr"
+                  target="_blank">
+                    Github
+                  </Menu.Item>
                 
               </Container>
             </Menu>
-            <HomepageHeading />
+            {this.props.about ? null : <HomepageHeading/>}
+            {/* <HomepageHeading /> */}
           </Segment>
         </Visibility>
 
@@ -172,7 +155,7 @@ class MobileContainer extends Component {
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false })
 
-  handleToggle = () => this.setState({ sidebarOpened: true })
+  handleToggle = () => this.setState({ sidebarOpened: true})
 
   render() {
     const { children } = this.props
@@ -192,16 +175,28 @@ class MobileContainer extends Component {
             <Menu.Item as='a' active>
               Home
             </Menu.Item>
-                <Menu.Item as='a'>Linkedin</Menu.Item>
-                <Menu.Item as='a'>Portfolio</Menu.Item>
-                <Menu.Item as='a'>Github</Menu.Item>
+                <Menu.Item as='a'
+                  href="https://www.linkedin.com/in/juan-carlos-patron/"
+                  target="_blank">
+                  Linkedin
+                </Menu.Item>
+                <Menu.Item as='a'
+                  href="https://jcpatronr.com"
+                  target="_blank">
+                  Portfolio
+                  </Menu.Item>
+                <Menu.Item as='a'
+                  href="https://github.com/charliepatronr"
+                  target="_blank">
+                  Github
+                </Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>
             <Segment
               inverted
               textAlign='center'
-              style={{ minHeight: 350, padding: '1em 0em' }}
+              style={{ minHeight: this.state.size, padding: '1em 0em' }}
               vertical
             >
               <Container>
@@ -209,18 +204,25 @@ class MobileContainer extends Component {
                   <Menu.Item onClick={this.handleToggle}>
                     <Icon name='sidebar' />
                   </Menu.Item>
-                  <Menu.Item position='right'>
-                    <Button as='a' inverted>
-                      Linkedin
+                  <Menu.Item position='right' >
+
+                    {/* ******************************************************** */}
+                    <Button as='a' 
+                      inverted
+                      onClick= {() =>this.props.showAbout()}>
+                      About
                     </Button>
-                    <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                      Portfolio
+                    <Button as='a' inverted style={{ marginLeft: '0.5em' }}
+                      position='left'
+                      onClick ={() => {this.props.showHome()}}
+                      target="_blank">
+                      Home
                     </Button>
                   </Menu.Item>
                 </Menu>
               </Container>
-              <HomepageHeading mobile />
-            </Segment>
+              {this.props.about ? null : <HomepageHeading/>}            
+              </Segment>
 
             {children}
           </Sidebar.Pusher>
@@ -234,14 +236,25 @@ MobileContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const ResponsiveContainer = ({ children }) => (
-  /* Heads up!
-   * For large applications it may not be best option to put all page into these containers at
-   * they will be rendered twice for SSR.
-   */
+const ResponsiveContainer = ({ children, about, showAbout, size, showHome, sizeMobile }) => (
+
   <MediaContextProvider>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
+    {/* ****************************************************************************** */}
+
+    <DesktopContainer 
+      about={about} 
+      showAbout={showAbout} 
+      showHome = {showHome}
+      size={size}> 
+      {children}
+    </DesktopContainer>
+    <MobileContainer 
+      about={about} 
+      showAbout={showAbout} 
+      showHome = {showHome}
+      size={sizeMobile}
+    > {children}</MobileContainer>
+    {/* ***************************************************************************** */}
   </MediaContextProvider>
 )
 
@@ -249,63 +262,92 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const LandingPage2 = (props) => (
-  <ResponsiveContainer>
-    {/* padding: '8em 0em' */}
-    <Segment inverted style={{ height: '101.5vh'}} vertical>
-      <Map cities={props.cities} history={props.history}/>
-    </Segment>
+class LandingPage2 extends Component {
+  constructor() {
+    super()
+    this.state = {
+      about: false, 
+      size: 500,
+      sizeMobile: 350
+    }
+  }
+  showAbout = () => this.setState({about: true , size:15})
+  showHome = () => this.setState({about: false , size:500})
 
-    <Segment inverted vertical style={{ padding: '5em 0em' }} >
-      <Container>
-        <Grid divided inverted stackable centered>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              <Header inverted as='h4' content='Contact' />
-              <List link inverted>
-                <List.Item as='a'>+1 (718) 753-4386</List.Item>
-                <List.Item as='a'>patronr.jc@gmail.com</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <Header inverted as='h4' content='Services' />
-              <List link inverted>
-                <List.Item as='a'>Full Stack Development</List.Item>
-                <List.Item as='a'>Quality Assurance</List.Item>
-                <List.Item as='a'>Agile Development</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <Header as='h4' inverted>
-                Social Media
-              </Header>
-              <Menu.Item
-                href="https://www.linkedin.com/in/juan-carlos-patron/"
-                position="right"
-                target="_blank"
-                >
-                <Icon name="linkedin" inverted color='white' size="large" />
-              </Menu.Item>
-              <Menu.Item
-                href="https://github.com/charliepatronr"
-                position="right"
-                target="_blank"
-                >
-                <Icon name="github" inverted color='white' size="large" />
-              </Menu.Item>
-              <Menu.Item
-                href="https://jcpatronr.com"
-                position="right"
-                target="_blank"
-                >
-                <Icon name="desktop" inverted color='white' size="large" />
-              </Menu.Item>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
-    </Segment>
-  </ResponsiveContainer>
-)
+  render() {
+    
+
+    return (
+      <ResponsiveContainer 
+      about={this.state.about} 
+      showAbout ={this.showAbout} 
+      size={this.state.size}
+      showHome ={this.showHome}
+      >
+
+      { !this.state.about ? (
+      <div>
+          <Segment inverted style={{ height: '101.5vh'}} vertical>
+            <Map cities={this.props.cities} history={this.props.history}/>
+          </Segment>
+
+          <Segment inverted vertical style={{ padding: '5em 0em' }} >
+            <Container>
+              <Grid divided inverted stackable centered>
+                <Grid.Row>
+                  <Grid.Column width={4}>
+                    <Header inverted as='h4' content='Contact' />
+                    <List link inverted>
+                      <List.Item as='a'>+1 (718) 753-4386</List.Item>
+                      <List.Item as='a'>patronr.jc@gmail.com</List.Item>
+                    </List>
+                  </Grid.Column>
+                  <Grid.Column width={4}>
+                    <Header inverted as='h4' content='Services' />
+                    <List link inverted>
+                      <List.Item as='a'>Full Stack Development</List.Item>
+                      <List.Item as='a'>Quality Assurance</List.Item>
+                      <List.Item as='a'>Agile Development</List.Item>
+                    </List>
+                  </Grid.Column>
+                  <Grid.Column width={4}>
+                    <Header as='h4' inverted>
+                      Social Media
+                    </Header>
+                    <Menu.Item
+                      href="https://www.linkedin.com/in/juan-carlos-patron/"
+                      position="right"
+                      target="_blank"
+                      >
+                      <Icon name="linkedin" inverted color='white' size="large" />
+                    </Menu.Item>
+                    <Menu.Item
+                      href="https://github.com/charliepatronr"
+                      position="right"
+                      target="_blank"
+                      >
+                      <Icon name="github" inverted color='white' size="large" />
+                    </Menu.Item>
+                    <Menu.Item
+                      href="https://jcpatronr.com"
+                      position="right"
+                      target="_blank"
+                      >
+                      <Icon name="desktop" inverted color='white' size="large" />
+                    </Menu.Item>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Container>
+          </Segment> 
+      </div> ) : <About/> 
+      }
+    
+      </ResponsiveContainer>
+
+    )
+  };
+}
+
 
 export default LandingPage2
