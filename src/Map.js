@@ -6,7 +6,8 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "./mapStyles"
-import { Link } from "react-router-dom"
+import { Image } from 'semantic-ui-react'
+
 
 
 
@@ -37,6 +38,25 @@ export default function LandingPage (props) {
     mapRef.current = map;
   }, []);
 
+  const findCityWeather = (id) => {
+      let element =  props.cities.find(element => element.city.weather_id === id)
+      console.log(element, 'ELEMENT')
+      const {icon } = element.city.weather.current.weather[0]
+      const {feels_like, temp} = element.city.weather.current
+      const {name, lat, lon} = element.city
+      const target = {
+          id,
+          name,
+          lat, 
+          lon,
+          iconSrc:  `https://openweathermap.org/img/w/${icon}.png`, 
+          feels_like, 
+          temp
+      }
+      return target
+      
+  }
+
 
   if(loadError) return "Error loading maps";
   if(!isLoaded) return  "Loading Maps"
@@ -53,12 +73,17 @@ export default function LandingPage (props) {
         props.cities.map(element => (
           <Marker 
             key={element.city.weather_id} 
+            weatherID={element.city.weather_id}
             position ={{
               lat: element.city.lat, 
               lng: element.city.lon
             }}
             onClick = {() => {
-              setSelected(element.city)
+                let weather = findCityWeather(element.city.weather_id)
+                console.log(weather)
+
+              setSelected(weather)
+              console.log(selected , 'SELECTED')
             }}
             
           />))
@@ -71,11 +96,15 @@ export default function LandingPage (props) {
               setSelected(null);
             }}
           >
-            <div>
+            <div style={{color: 'black'}}>
               <h2 >
                 {selected.name}
               </h2>
-              <h2 onClick ={ () => props.history.push(`/weather/${selected.weather_id}`)}> Expand </h2>
+              <Image src={selected.iconSrc}/>
+              <p>{selected.temp}</p>
+              <p>Feels like: {selected.feels_like}</p>
+              
+              <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> Forecast </p>
             </div>
           </InfoWindow>
         ) : null}

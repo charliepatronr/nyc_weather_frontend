@@ -2,6 +2,7 @@ import { createMedia } from '@artsy/fresnel'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import Map from './Map'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Button,
   Container,
@@ -16,6 +17,9 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+import {
+  faLinkedin,
+} from '@fortawesome/free-solid-svg-icons';
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -47,22 +51,35 @@ const HomepageHeading = ({ mobile }) => (
 
   <Grid column ={12} container stackable verticalAlign='middle' horizontalAlign= 'middle'>
         <Grid.Row>
-          <Grid.Column width={10}>
-
-            <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+          <Grid.Column >
+            <p style={{ fontSize: '1emm' }}>
+              The CNYCN Weather application displays the weather in five different cities utilizing the Open Weather Map API, 
+              which allows us to view the current weather for each city along with a 7 day forecast.
             </p>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
+            <p style={{ fontSize: '1emm' }}>
+              To utilize the application scroll down to the Google Map, and click on one of the markers in the cities to view 
+              the weather. To get more information on the weather click on <strong>Forecast</strong>. 
+              
+            </p>
+            <p>For more details on the application's architecture click on <strong>About</strong> in the nav bar.</p>
+
+{/* 
+
+            <p style={{ fontSize: '1emm' }}>
+              The application's architecture includes a Ruby on Rails API backend with a PostgreSQL db which allows us to store
+              the cities we want to display and add new cities with usage. 
+              On the frontend the application uses React using functional components and hooks for scalability.
             </p>
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
-              <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
+              <p style={{ fontSize: '1emm' }}>
+                Lastly this application uses the Google Maps API to render the current cities we want to display the 
+                weather for more easily for the end user.
             </p>
+            <p style={{ fontSize: '1emm' }}>
+                I would like to thank Karen, Cristian and Christopher for the interview process and hopefully you find 
+                the application built useful. 
+            </p> */}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -114,7 +131,7 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign='center'
-            style={{ minHeight: 600, padding: '1em 0em' }}
+            style={{ minHeight: 500, padding: '1em 0em' }}
             vertical
           >
             <Menu
@@ -236,128 +253,53 @@ const LandingPage2 = (props) => (
   <ResponsiveContainer>
     {/* padding: '8em 0em' */}
     <Segment inverted style={{ height: '101.5vh'}} vertical>
-      <Map cities={props.cities}/>
-
-
-
-      {/* <Grid container stackable verticalAlign='middle'>
-        <Grid.Row>
-          <Grid.Column width={8}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              We Help Companies and Companions
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
-            </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
-            </p>
-          </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign='center'>
-            <Button size='huge'>Check Them Out</Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Map cities={props.cities} history={props.history}/>
     </Segment>
 
-    <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row textAlign='center'>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "What a Company"
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
-          </Grid.Column>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/images/avatar/large/nan.jpg' />
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
-
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Container text>
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Breaking The Grid, Grabs Your Attention
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
-          Instead of focusing on content creation and hard work, we have learned how to master the
-          art of doing nothing by providing massive amounts of whitespace and generic content that
-          can seem massive, monolithic and worth your attention.
-        </p>
-        <Button as='a' size='large'>
-          Read More
-        </Button>
-
-        <Divider
-          as='h4'
-          className='header'
-          horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href='#'>Case Studies</a>
-        </Divider>
-
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Did We Tell You About Our Bananas?
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-          it's really true. It took years of gene splicing and combinatory DNA research, but our
-          bananas can really dance.
-        </p>
-        <Button as='a' size='large'>
-          I'm Still Quite Interested
-        </Button>
-      </Container> */}
-    </Segment>
-
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ padding: '5em 0em' }} >
       <Container>
-        <Grid divided inverted stackable>
+        <Grid divided inverted stackable centered>
           <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='About' />
+            <Grid.Column width={4}>
+              <Header inverted as='h4' content='Contact' />
               <List link inverted>
-                <List.Item as='a'>Sitemap</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
-                <List.Item as='a'>Religious Ceremonies</List.Item>
-                <List.Item as='a'>Gazebo Plans</List.Item>
+                <List.Item as='a'>+1 (718) 753-4386</List.Item>
+                <List.Item as='a'>patronr.jc@gmail.com</List.Item>
               </List>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Header inverted as='h4' content='Services' />
               <List link inverted>
-                <List.Item as='a'>Banana Pre-Order</List.Item>
-                <List.Item as='a'>DNA FAQ</List.Item>
-                <List.Item as='a'>How To Access</List.Item>
-                <List.Item as='a'>Favorite X-Men</List.Item>
+                <List.Item as='a'>Full Stack Development</List.Item>
+                <List.Item as='a'>Quality Assurance</List.Item>
+                <List.Item as='a'>Agile Development</List.Item>
               </List>
             </Grid.Column>
-            <Grid.Column width={7}>
+            <Grid.Column width={4}>
               <Header as='h4' inverted>
-                Footer Header
+                Social Media
               </Header>
-              <p>
-                Extra space for a call to action inside the footer that could help re-engage users.
-              </p>
+              <Menu.Item
+                href="https://www.linkedin.com/in/juan-carlos-patron/"
+                position="right"
+                target="_blank"
+                >
+                <Icon name="linkedin" inverted color='white' size="large" />
+              </Menu.Item>
+              <Menu.Item
+                href="https://github.com/charliepatronr"
+                position="right"
+                target="_blank"
+                >
+                <Icon name="github" inverted color='white' size="large" />
+              </Menu.Item>
+              <Menu.Item
+                href="https://jcpatronr.com"
+                position="right"
+                target="_blank"
+                >
+                <Icon name="desktop" inverted color='white' size="large" />
+              </Menu.Item>
             </Grid.Column>
           </Grid.Row>
         </Grid>

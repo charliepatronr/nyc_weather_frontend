@@ -19,7 +19,7 @@ import {
     const {dt, } = props.forecast
     const {min, max} = props.forecast.temp
 
-    const {main, description, } = props.forecast.weather[0]
+    const {main, description, icon } = props.forecast.weather[0]
 
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = [
@@ -41,6 +41,7 @@ import {
       const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${
         months[currentDate.getMonth()]
       }`;
+      const iconSrc = `https://openweathermap.org/img/w/${icon}.png`;
 
       const timeConverter = (dt) => {
           let target = new Date(dt * 1000)
@@ -88,11 +89,12 @@ import {
                     </Card.Header>
                     <Card.Description>
                         <div>{timeConverter(dt)} </div>
-                        <div>{weatherIcon} 
+                        {/* <div>{weatherIcon} 
                             <Card.Meta>
                                 {description}
                             </Card.Meta>
-                        </div>
+                        </div> */}
+                        <Image src={iconSrc} />
                         <div>High: {max}&#176; </div>
                         <div>Low: {min}&#176; </div>
                     </Card.Description>
