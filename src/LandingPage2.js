@@ -287,7 +287,7 @@ class LandingPage2 extends Component {
 
       { !this.state.about ? (
       <div>
-          <Segment inverted style={{ height: '101.5vh'}} vertical>
+          <Segment inverted  vertical>
             <Map cities={this.props.cities} history={this.props.history}/>
           </Segment>
 

@@ -82,21 +82,25 @@ import {
 
     return (
         <Grid.Column>
+            <div>
+                
+            </div>
             <Card className="forecast">
-                <Card.Content>
+                <Card.Content textAlign="center">
                     <Card.Header>
 
                     </Card.Header>
                     <Card.Description>
-                        <div>{timeConverter(dt)} </div>
+                        <div ><strong> {timeConverter(dt)} </strong> </div>
                         {/* <div>{weatherIcon} 
                             <Card.Meta>
                                 {description}
                             </Card.Meta>
                         </div> */}
                         <Image src={iconSrc} />
-                        <div>High: {max}&#176; </div>
-                        <div>Low: {min}&#176; </div>
+                        <div> </div>
+                        <div >High&nbsp;&nbsp; {max}&#176; </div>
+                        <div >Low&nbsp;&nbsp; {min}&#176; </div>
                     </Card.Description>
                 </Card.Content>
             </Card>
