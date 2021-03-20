@@ -14,7 +14,6 @@ import {
     faSun,
     faSmog,
   } from '@fortawesome/free-solid-svg-icons';
-import { render } from '@testing-library/react';
 
  export default function CityWeather (props) {
     const {...city} = props.city.city
