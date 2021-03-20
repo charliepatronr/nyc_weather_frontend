@@ -80,18 +80,18 @@ import {
 
     return (
       <div  >
-        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle' >
+        <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle' stackable >
 
 
-          <Grid.Row stretch >
-            <Grid columns={2} textAlign='left'>
+          <Grid.Row  >
+            <Grid columns={2} textAlign='bottom'>
               <Grid.Column>
               <Card fluid className="currentWeather">
                   <Card.Content>
-                    <Card.Header>
+                    <Card.Header style={{color: 'white', fontSize: '60px', fontWeight: 'bold'}}>
                         {name}
                     </Card.Header>
-                    <Card.Description>
+                    <Card.Description style={{color: 'white', fontSize: '30px'}}>
                         {date}
                     </Card.Description>
                   </Card.Content>
@@ -109,27 +109,39 @@ import {
             <Grid columns={2}>
 
               
-              <Grid.Row stretched>
+              <Grid.Row >
 
               <Grid.Column >
 
                 <Card fluid className="currentWeather">
                   <Card.Content>
-                      {weatherIcon}
-                      {temp}&#176;
-                      {description}
+                      <Card.Description>
+                          <Grid columns={2}>
+                              <Grid.Column width={7} textAlign="right">
+                              {weatherIcon}
 
+                              </Grid.Column>
+                              <Grid.Column textAlign="left" verticalAlign="middle">
+                                  <div style={{fontSize: '50px', paddingBottom: '20px'}}>
+                                    {temp}&#176;
+                                  </div>
+                                  <div style={{fontSize: '30px',}}>
+                                    {description}
+                                  </div>
+                              </Grid.Column>
+                          </Grid>
+                      </Card.Description>
                   </Card.Content>
                 </Card>
                 </Grid.Column>
 
                 <Grid.Column>
 
-                <Grid columns={3}>
+                <Grid columns={3} style={{backgroundColor: 'rgba(255, 255, 255, 0.2)', borderRadius: '20px'}}>
 
                   <Grid.Row> 
                     <Grid.Column>
-                      <Card className="forecast">
+                      <Card className="current">
                         <Card.Content>
                           <Card.Description>
                             <div>{max}&#176; </div>
@@ -140,7 +152,7 @@ import {
                     </Grid.Column>
 
                     <Grid.Column>
-                      <Card className="forecast">
+                      <Card className="current">
                       <Card.Content>
                           <Card.Description>
                             <div>{wind_speed} mph </div>
@@ -152,7 +164,7 @@ import {
 
 
                     <Grid.Column>
-                      <Card className="forecast">
+                      <Card className="current">
                       <Card.Content>
                           <Card.Description>
                             <div>{sunrise} </div>
@@ -166,7 +178,7 @@ import {
 
                   <Grid.Row>
                   <Grid.Column>
-                    <Card className="forecast">
+                    <Card className="current">
                         <Card.Content>
                             <Card.Description>
                                 <div>{min}&#176; </div>
@@ -176,7 +188,7 @@ import {
                     </Card>
                   </Grid.Column>
                   <Grid.Column>
-                    <Card className="forecast">
+                    <Card className="current">
                         <Card.Content>
                                 <Card.Description>
                                     <div>{humidity} % </div>
@@ -186,7 +198,7 @@ import {
                         </Card>
                   </Grid.Column>
                   <Grid.Column>
-                    <Card className="forecast">
+                    <Card className="current">
                     <Card.Content>
                           <Card.Description>
                             <div>{sunset} </div>

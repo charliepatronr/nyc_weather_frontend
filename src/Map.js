@@ -6,7 +6,9 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "./mapStyles"
-import { Image } from 'semantic-ui-react'
+import { Image, Card, Icon, Button} from 'semantic-ui-react'
+
+
 
 
 
@@ -80,8 +82,6 @@ export default function LandingPage (props) {
             }}
             onClick = {() => {
                 let weather = findCityWeather(element.city.weather_id)
-                console.log(weather)
-
               setSelected(weather)
               console.log(selected , 'SELECTED')
             }}
@@ -97,14 +97,37 @@ export default function LandingPage (props) {
             }}
           >
             <div style={{color: 'black'}}>
-              <h2 >
+            <Card className="forecast" centered>
+                <Card.Content textAlign="center">
+                    <Card.Header style={{fontSize: '30px', paddingBottom: '5px', fontWeight: 400}}>
+                        {selected.name}
+                    </Card.Header>
+                    <div  style={{fontSize: '23px', paddingBottom: '3px', fontWeight: 400}}>
+                        <Image src={selected.iconSrc} size="tiny"/>
+                        {selected.temp}&#176;
+                    </div>
+                    <div style={{fontSize: '15px',}}>
+                        Feels like {selected.feels_like}&#176; 
+                    </div>
+                    <Card.Description>
+                    </Card.Description>
+                </Card.Content>
+                <Card.Content textAlign="center">
+                    <Button >
+                        {/* <Icon calendar outline color="black" size="massive"/> */}
+                        <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> <strong> FORECAST</strong> </p>
+                    </Button>
+
+                </Card.Content>
+            </Card>
+              {/* <h2 >
                 {selected.name}
               </h2>
               <Image src={selected.iconSrc}/>
               <p>{selected.temp}</p>
               <p>Feels like: {selected.feels_like}</p>
               
-              <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> Forecast </p>
+              <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> Forecast </p> */}
             </div>
           </InfoWindow>
         ) : null}

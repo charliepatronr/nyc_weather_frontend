@@ -22,11 +22,16 @@
 
 .cityWeather {
   height: 100vh;
+  
+  
 
 }
 
 body .ui.card, body .ui.cards>.card{
   box-shadow: none;
+  border-radius: 20px;
+  
+
 }
 
 
@@ -39,6 +44,27 @@ body .ui.card, body .ui.cards>.card{
 
 .ui.card.forecast {
   background-color: rgba(255, 255, 255, 0.2);
+  color: 'white'
+}
+
+.ui.card.current {
+  background-color: transparent;
+  color: 'white';
 
 }
+
+.ui.card>.content>a.header,
+.ui.cards>.card>.content>a.header,
+.ui.card .meta,
+.ui.cards>.card .meta,
+.ui.card>.content>.description,
+.ui.cards>.card>.content>.description,
+.ui.card>.extra a:not(.ui),
+.ui.cards>.card>.extra a:not(.ui) {
+  color: white;
+  font-weight: 500;
+  /* font-size: 15px; */
+
+}
+
 
