@@ -12,6 +12,8 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
+
+
 const FixedMenuLayout = () => (
   <div>
     <Container text style={{ marginTop: '7em' }}>
