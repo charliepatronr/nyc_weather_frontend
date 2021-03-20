@@ -14,7 +14,7 @@ import {
 
 
 
-const FixedMenuLayout = () => (
+const About = () => (
   <div>
     <Container text style={{ marginTop: '7em' }}>
       <Header as='h1'>CNYCN Weather Architecture</Header>
@@ -135,4 +135,4 @@ const FixedMenuLayout = () => (
   </div>
 )
 
-export default FixedMenuLayout
+export default About
