@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react"
 // import LandingPage from './LandingPage'
 import LandingPage from './LandingPage'
 import WeatherContainer from './WeatherContainer'
+import About from './About'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 
@@ -20,9 +21,17 @@ function App() {
   
     useEffect( () => {
       fetch(`${url}`)
-      .then(response => response.json())
-      .then(response => {
-        setCities([...response])
+        .then(response => {
+          if(!response.ok) {
+            throw Error(`Could not connect to Open Weather API status: ${response.status}`)
+          }
+           return response.json()
+        })
+        .then(response => {
+          setCities([...response])
+          })
+        .catch( err => {
+          console.log(err)
         })
     }, [])
 
@@ -35,6 +44,10 @@ function App() {
       <Switch>
         {/* MUST PASS ALL STATE TO CITY WEATHER COMPONENT SINCE I CANT KNOW WHICH CITY WILL BE RENDERED 
         OTHER OPTION IS TO MAKE API CALL WITH THE WEATER_ID IN URL FOR THAT SPECIFIC CITY */}
+        <Route path='/about' 
+          render ={(props) =>(
+          <About {...props} cities={cities}/>
+        )}/>
         <Route path='/weather/:id' 
           render ={(props) =>(
           <WeatherContainer {...props} cities={cities}/>
