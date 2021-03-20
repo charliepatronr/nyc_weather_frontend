@@ -21,9 +21,17 @@ function App() {
   
     useEffect( () => {
       fetch(`${url}`)
-      .then(response => response.json())
-      .then(response => {
-        setCities([...response])
+        .then(response => {
+          if(!response.ok) {
+            throw Error(`Could not connect to Open Weather API status: ${response.status}`)
+          }
+           return response.json()
+        })
+        .then(response => {
+          setCities([...response])
+          })
+        .catch( err => {
+          console.log(err)
         })
     }, [])
 
