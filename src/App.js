@@ -33,8 +33,8 @@ function App() {
         .then(response => {
           setCities([...response])
           })
-        .catch( err => {
-          console.log(err)
+        .catch( error => {
+          console.log(error)
         })
     }, [])
 
