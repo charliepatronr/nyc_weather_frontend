@@ -37,70 +37,28 @@ import {
         'December',
       ];
 
-      const currentDate = new Date();
-      const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${
-        months[currentDate.getMonth()]
-      }`;
       const iconSrc = `https://openweathermap.org/img/w/${icon}.png`;
 
       const timeConverter = (dt) => {
           let target = new Date(dt * 1000)
-
-          var year = target.getFullYear();
           var month = months[target.getMonth()];
           var date = target.getDate();
-          var hour = target.getHours();
-          var min = target.getMinutes();
-          var sec = target.getSeconds();
           var time = month + ' ' + date;
           return time;
       }
 
-      let weatherIcon = null;
-      console.log(main, 'MAIN')
-
-    if (main === 'Thunderstorm') {
-        weatherIcon = <FontAwesomeIcon  icon={faBolt} color="white" size="2x"/>;
-      } else if (main === 'Drizzle') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudRain} color="white" size="2x"/>;
-      } else if (main === 'Rain') {
-        weatherIcon = <FontAwesomeIcon icon={faCloudShowersHeavy} color="white" size="2x"/>;
-      } else if (main === 'Snow') {
-        weatherIcon = <FontAwesomeIcon icon={faSnowflake} color="white" size="2x"/>;
-      } else if (main === 'Clear') {
-        weatherIcon = <FontAwesomeIcon icon={faSun} color="white" size="2x"/>;
-      } else if (main === 'Clouds') {
-        weatherIcon = <FontAwesomeIcon icon={faCloud} color="white" size="2x"/>;
-      } else {
-        weatherIcon = <FontAwesomeIcon icon={faSmog} color="white" size="2x"/>;
-      }
-   
-    
-    
-
-
+      let roundedTemps = props.round(null, max, min)
 
     return (
         <Grid.Column>
-            <div>
-                
-            </div>
             <Card className="forecast">
                 <Card.Content textAlign="center">
-                    <Card.Header>
-
-                    </Card.Header>
                     <Card.Description>
                         <div ><strong> {timeConverter(dt)} </strong> </div>
-                        {/* <div>{weatherIcon} 
-                            <Card.Meta>
-                                {description}
-                            </Card.Meta>
-                        </div> */}
                         <Image src={iconSrc} />
                         <div> </div>
-                        <div >High&nbsp;&nbsp; {max}&#176; </div>
-                        <div >Low&nbsp;&nbsp; {min}&#176; </div>
+                        <div >High&nbsp;&nbsp; {roundedTemps.max}&#176; </div>
+                        <div >Low&nbsp;&nbsp; {roundedTemps.min}&#176; </div>
                     </Card.Description>
                 </Card.Content>
             </Card>

@@ -135,7 +135,6 @@ class DesktopContainer extends Component {
               </Container>
             </Menu>
             {this.props.about ? null : <HomepageHeading/>}
-            {/* <HomepageHeading /> */}
           </Segment>
         </Visibility>
 
@@ -205,8 +204,6 @@ class MobileContainer extends Component {
                     <Icon name='sidebar' />
                   </Menu.Item>
                   <Menu.Item position='right' >
-
-                    {/* ******************************************************** */}
                     <Button as='a' 
                       inverted
                       onClick= {() =>this.props.showAbout()}>
@@ -223,7 +220,6 @@ class MobileContainer extends Component {
               </Container>
               {this.props.about ? null : <HomepageHeading/>}            
               </Segment>
-
             {children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -240,7 +236,6 @@ const ResponsiveContainer = ({ children, about, showAbout, size, showHome, sizeM
 
   <MediaContextProvider>
     {/* ****************************************************************************** */}
-
     <DesktopContainer 
       about={about} 
       showAbout={showAbout} 

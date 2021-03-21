@@ -18,7 +18,8 @@ import {
 
 
 function App() {
-    const url =  'https://nyc-weather-backend.herokuapp.com/cities'
+    // const url =  'https://nyc-weather-backend.herokuapp.com/cities'
+    const url = 'http://localhost:3000/cities'
     const [cities, setCities] = useState([])
   
     useEffect( () => {
@@ -44,8 +45,6 @@ function App() {
     <BrowserRouter>
   
       <Switch>
-        {/* MUST PASS ALL STATE TO CITY WEATHER COMPONENT SINCE I CANT KNOW WHICH CITY WILL BE RENDERED 
-        OTHER OPTION IS TO MAKE API CALL WITH THE WEATER_ID IN URL FOR THAT SPECIFIC CITY */}
         <Route path='/about' 
           render ={(props) =>(
           <About {...props} cities={cities}/>

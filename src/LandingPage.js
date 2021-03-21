@@ -62,52 +62,15 @@ const HomepageHeading = ({ mobile }) => (
               
             </p>
             <p>For more details on the application's architecture click on <strong>About</strong> in the nav bar.</p>
-
-{/* 
-
-            <p style={{ fontSize: '1emm' }}>
-              The application's architecture includes a Ruby on Rails API backend with a PostgreSQL db which allows us to store
-              the cities we want to display and add new cities with usage. 
-              On the frontend the application uses React using functional components and hooks for scalability.
-            </p>
-          </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-              <p style={{ fontSize: '1emm' }}>
-                Lastly this application uses the Google Maps API to render the current cities we want to display the 
-                weather for more easily for the end user.
-            </p>
-            <p style={{ fontSize: '1emm' }}>
-                I would like to thank Karen, Cristian and Christopher for the interview process and hopefully you find 
-                the application built useful. 
-            </p> */}
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    {/* <Header
-      as='h2'
-      content='Do whatever you want when you want to.'
-      inverted
-      style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
-      }}
-    /> */}
-    {/* <Button primary size='huge'>
-      Get Started
-      <Icon name='right arrow' />
-    </Button> */}
   </Container>
 )
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
 }
-
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
 
  //Desktop Nav bar and container
 class DesktopContainer extends Component {
@@ -235,10 +198,7 @@ MobileContainer.propTypes = {
 }
 
 const ResponsiveContainer = ({ children }) => (
-  /* Heads up!
-   * For large applications it may not be best option to put all page into these containers at
-   * they will be rendered twice for SSR.
-   */
+
   <MediaContextProvider>
     <DesktopContainer>{children}</DesktopContainer>
     <MobileContainer>{children}</MobileContainer>
@@ -251,7 +211,6 @@ ResponsiveContainer.propTypes = {
 
 const LandingPage = (props) => (
   <ResponsiveContainer>
-    {/* padding: '8em 0em' */}
     <Segment inverted style={{ height: '101.5vh'}} vertical>
       <Map cities={props.cities} history={props.history}/>
     </Segment>

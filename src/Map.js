@@ -19,8 +19,8 @@ const mapContainerStyle = {
   height: '100vh'
 }
 const center = {
-  lat: 40.714272, 
-  lng: -74.005966
+  lat: 36.084621, 
+  lng: -96.921387
 }
 const options = {
   styles : mapStyles
@@ -67,7 +67,7 @@ export default function LandingPage (props) {
     <div>
       <GoogleMap 
       mapContainerStyle ={mapContainerStyle}
-      zoom={10}
+      zoom={5}
       center={center}
       options = {options}
       >
@@ -97,37 +97,26 @@ export default function LandingPage (props) {
             }}
           >
             <div style={{color: 'black'}}>
-            <Card className="forecast" centered>
-                <Card.Content textAlign="center">
-                    <Card.Header style={{fontSize: '30px', paddingBottom: '5px', fontWeight: 400}}>
-                        {selected.name}
-                    </Card.Header>
-                    <div  style={{fontSize: '23px', paddingBottom: '3px', fontWeight: 400}}>
-                        <Image src={selected.iconSrc} size="tiny"/>
-                        {selected.temp}&#176;
-                    </div>
-                    <div style={{fontSize: '15px',}}>
-                        Feels like {selected.feels_like}&#176; 
-                    </div>
-                    <Card.Description>
-                    </Card.Description>
-                </Card.Content>
-                <Card.Content textAlign="center">
-                    <Button >
-                        {/* <Icon calendar outline color="black" size="massive"/> */}
-                        <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> <strong> FORECAST</strong> </p>
-                    </Button>
-
-                </Card.Content>
-            </Card>
-              {/* <h2 >
-                {selected.name}
-              </h2>
-              <Image src={selected.iconSrc}/>
-              <p>{selected.temp}</p>
-              <p>Feels like: {selected.feels_like}</p>
-              
-              <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> Forecast </p> */}
+                <Card className="forecast" centered>
+                    <Card.Content textAlign="center">
+                        <Card.Header style={{fontSize: '30px', paddingBottom: '5px', fontWeight: 400}}>
+                            {selected.name}
+                        </Card.Header>
+                        <div  style={{fontSize: '23px', paddingBottom: '3px', fontWeight: 400}}>
+                            <Image src={selected.iconSrc} size="tiny"/>
+                            {selected.temp}&#176;
+                        </div>
+                        <div style={{fontSize: '15px',}}>
+                            Feels like {selected.feels_like}&#176; 
+                        </div>
+                    </Card.Content>
+                    <Card.Content textAlign="center">
+                        <Button >
+                            {/* <Icon calendar outline color="black" size="massive"/> */}
+                            <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> <strong> FORECAST</strong> </p>
+                        </Button>
+                    </Card.Content>
+                </Card>
             </div>
           </InfoWindow>
         ) : null}
