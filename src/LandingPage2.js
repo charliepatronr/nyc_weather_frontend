@@ -171,24 +171,40 @@ class MobileContainer extends Component {
             vertical
             visible={sidebarOpened}
           >
-            <Menu.Item as='a' active>
-              Home
+            <Menu.Item as='a' active
+            onClick= {() => {
+              this.props.showHome()
+              this.handleSidebarHide()
+            }}
+            >Home
             </Menu.Item>
-                <Menu.Item as='a'
-                  href="https://www.linkedin.com/in/juan-carlos-patron/"
-                  target="_blank">
-                  Linkedin
-                </Menu.Item>
-                <Menu.Item as='a'
-                  href="https://jcpatronr.com"
-                  target="_blank">
-                  Portfolio
-                  </Menu.Item>
-                <Menu.Item as='a'
-                  href="https://github.com/charliepatronr"
-                  target="_blank">
-                  Github
-                </Menu.Item>
+            <Menu.Item 
+              as='a'
+              inverted
+              onClick= {() =>{
+                this.handleSidebarHide()
+                this.props.showAbout()
+              }}>
+              About
+            </Menu.Item>
+            <Menu.Item as='a'
+              href="https://www.linkedin.com/in/juan-carlos-patron/"
+              onClick={()=> this.handleSidebarHide()}
+              target="_blank">
+              Linkedin
+            </Menu.Item>
+            <Menu.Item as='a'
+              href="https://jcpatronr.com"
+              onClick={()=> this.handleSidebarHide()}
+              target="_blank">
+              Portfolio
+              </Menu.Item>
+            <Menu.Item as='a'
+              href="https://github.com/charliepatronr"
+              onClick={()=> this.handleSidebarHide()}
+              target="_blank">
+              Github
+            </Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>

@@ -42,7 +42,6 @@ export default function LandingPage (props) {
 
   const findCityWeather = (id) => {
       let element =  props.cities.find(element => element.city.weather_id === id)
-      console.log(element, 'ELEMENT')
       const {icon } = element.city.weather.current.weather[0]
       const {feels_like, temp} = element.city.weather.current
       const {name, lat, lon} = element.city
@@ -83,7 +82,6 @@ export default function LandingPage (props) {
             onClick = {() => {
                 let weather = findCityWeather(element.city.weather_id)
               setSelected(weather)
-              console.log(selected , 'SELECTED')
             }}
             
           />))
@@ -113,7 +111,10 @@ export default function LandingPage (props) {
                     <Card.Content textAlign="center">
                         <Button >
                             {/* <Icon calendar outline color="black" size="massive"/> */}
-                            <p onClick ={ () => props.history.push(`/weather/${selected.id}`)}> <strong> FORECAST</strong> </p>
+                            <p onClick ={ () => {
+                                console.log('PUSHED FORECAST')
+                                props.history.push(`/weather/${selected.id}`)}
+                            }> <strong> FORECAST</strong> </p>
                         </Button>
                     </Card.Content>
                 </Card>

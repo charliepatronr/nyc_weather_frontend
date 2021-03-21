@@ -71,6 +71,8 @@ import {
           stateOrCountry = state
       }
 
+      const descriptionCapitalized = description.charAt(0).toUpperCase() + description.slice(1)
+
     const roundedTemps = (temp, max, min) => {
         return {
             temp: Math.round(temp),
@@ -200,7 +202,7 @@ import {
                                     {newTemps.temp}&#176;
                                   </div>
                                   <div style={{fontSize: '30px',}}>
-                                    {description}
+                                    {descriptionCapitalized}
                                   </div>
                               </Grid.Column>
                           </Grid>
