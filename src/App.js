@@ -18,7 +18,7 @@ import {
 
 
 function App() {
-    const url =  'http://localhost:3000/cities'
+    const url =  'https://nyc-weather-frontend.herokuapp.com/cities'
     const [cities, setCities] = useState([])
   
     useEffect( () => {
