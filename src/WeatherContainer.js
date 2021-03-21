@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom"
 import { Segment } from 'semantic-ui-react'
 import CityWeather from './CityWeather'
+import Loading from './Loading'
 
 
 
@@ -25,7 +26,7 @@ export default function WeatherContainer (props) {
 
     return (
       <div className='weatherContainer'> 
-          {currentCity ? <CityWeather city={currentCity} history={props.history}/> : <div> ADD LOADING PAGE</div> }
+          {currentCity ? <CityWeather city={currentCity} history={props.history}/> : <Loading/> }
       </div>
     )
 

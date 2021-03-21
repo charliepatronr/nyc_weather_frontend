@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom"
-import { Grid, Image, Card, Segment, Container, Header, Button} from 'semantic-ui-react'
+import { Grid, Image, Card, Segment, Container, Header, Button, Loader} from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Forecast from './Forecast'
 
@@ -99,6 +99,7 @@ import {
     return (
       <div  >
         <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle' stackable >
+            {!props.cities && <Loader/> }
 
             
             {/* <Grid.Row  textAlign="right" verticalAlign='bottom'  >
