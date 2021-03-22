@@ -33,7 +33,11 @@ const About = () => (
         hooks, makes the code more readable and maintanable. To display the
         current weather for the 5 different cities I employed the Google Maps
         API. This gives the end user a more visual representation of each city
-        and the differences in weather. The Semantic UI framework was used to
+        and the differences in weather. The application also allows the user to
+        view the weather for any coordinates in the world. The user simply has to 
+        double click on the desired place on the map. Then a blue marker will pop 
+        up in this location. After this the user clicks on the marker and the 
+        weather will be displayed. The Semantic UI framework was used to
         assist in styling.
       </p>
       <h3>Deployement</h3>
