@@ -26,7 +26,6 @@ const options = {
 export default function Map(props) {
   const [selected, setSelected] = useState(null);
   const [newMarkers, setNewMarkers] = useState([]);
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -89,7 +88,9 @@ export default function Map(props) {
     ]);
   }, []);
 
-  const url = "http://localhost:3000/marker";
+  // const url = "http://localhost:3000/marker";
+  const url = "https://nyc-weather-backend.herokuapp.com/marker"
+
 
   //Fetches city weather after double click on map
   const fetchWeather = (lat, lng) => {
@@ -234,3 +235,4 @@ export default function Map(props) {
     </div>
   );
 }
+
