@@ -195,9 +195,10 @@ export default function Map(props) {
                   >
                     {selected.name ? selected.name : `${selected.timezone}`}
                   </Card.Header>
-                  <Card.Meta>
-                    <span style={{ color: "gray" }}>Timezone</span>
-                  </Card.Meta>
+                  {selected.timezone ? (
+                    <Card.Meta>
+                      <span style={{ color: "gray" }}>Timezone</span>
+                    </Card.Meta>) : null}
                   <div
                     style={{
                       fontSize: "23px",
