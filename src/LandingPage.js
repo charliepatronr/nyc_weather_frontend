@@ -58,9 +58,7 @@ const HomepageHeading = ({ mobile }) => (
             If you want to view the weather for any other place in the world,
             simply search for this place on the map, and double click on the
             desired location on the map. After the double click a blue marker
-            will pop up. Click on the marker to view the weather. To have a more
-            detailed forecast of this location click on on{" "}
-            <strong>Forecast</strong>.
+            will pop up. Click on the marker to view the weather.
           </p>
           <p>
             For more details on the application's architecture click on{" "}
@@ -310,7 +308,7 @@ ResponsiveContainer.propTypes = {
 };
 
 //renders responsive container and google map or about page depeding on state
-class LandingPage2 extends Component {
+class LandingPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -394,4 +392,4 @@ class LandingPage2 extends Component {
   }
 }
 
-export default LandingPage2;
+export default LandingPage;

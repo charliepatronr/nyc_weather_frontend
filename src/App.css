@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 .weatherContainer{
   height: 103vh;
   background-image: url("./assets/weather.jpg");
@@ -63,5 +57,3 @@ body .ui.card, body .ui.cards>.card{
   /* font-size: 15px; */
 
 }
-
-
