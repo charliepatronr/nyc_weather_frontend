@@ -194,6 +194,9 @@ export default function Map(props) {
                   >
                     {selected.name ? selected.name : `${selected.timezone}`}
                   </Card.Header>
+                  <Card.Meta>
+                    <span style={{ color: "gray" }}>Timezone</span>
+                  </Card.Meta>
                   <div
                     style={{
                       fontSize: "23px",
@@ -202,7 +205,7 @@ export default function Map(props) {
                     }}
                   >
                     <Image src={selected.iconSrc} size="tiny" />
-                    {selected.temp}&#176;
+                    {selected.temp}&nbsp;&#176;F
                   </div>
                   <div style={{ fontSize: "15px" }}>
                     Feels like {selected.feels_like}&#176;

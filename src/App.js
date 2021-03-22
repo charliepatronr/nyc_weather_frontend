@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LandingPage2 from "./LandingPage";
-
+import LandingPage from "./LandingPage";
 import WeatherContainer from "./WeatherContainer";
 import About from "./About";
 import "semantic-ui-css/semantic.min.css";
@@ -8,8 +7,8 @@ import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
-  // const url =  'https://nyc-weather-backend.herokuapp.com/cities'
-  const url = "http://localhost:3000/cities";
+  const url = "https://nyc-weather-backend.herokuapp.com/cities";
+  // const url = "http://localhost:3000/cities";
   const [cities, setCities] = useState([]);
 
   //API call on initialization for the 5 current cities in db
@@ -45,12 +44,12 @@ function App() {
         />
         <Route
           path="/weather"
-          render={(props) => <LandingPage2 {...props} cities={cities} />}
+          render={(props) => <LandingPage {...props} cities={cities} />}
         />
         <Route
           exact
           path="/"
-          render={(props) => <LandingPage2 {...props} cities={cities} />}
+          render={(props) => <LandingPage {...props} cities={cities} />}
         />
         {/* ADD 404 PAGE  */}
       </Switch>

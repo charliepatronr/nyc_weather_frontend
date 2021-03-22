@@ -125,34 +125,6 @@ export default function CityWeather(props) {
         verticalAlign="middle"
         stackable
       >
-        {/* <Grid.Row  textAlign="right" verticalAlign='bottom'  >
-                <Grid.Column width={15}>
-                <Button onClick ={ () => props.history.push('/weather')}>
-                      HOME
-                  </Button>
-                </Grid.Column>
-            </Grid.Row>
-
-
-          <Grid.Row >
-            <Grid columns={2}  textAlign='left' verticalAlign='bottom'>
-              <Grid.Column width={13} >
-              <Card fluid className="currentWeather">
-                  <Card.Content>
-                    <Card.Header style={{color: 'white', fontSize: '60px', fontWeight: 'bold'}}>
-                        {name}, {stateOrCountry}
-                    </Card.Header>
-                    <Card.Description style={{color: 'white', fontSize: '30px'}}>
-                        {date}
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-
-              
-            </Grid>
-          </Grid.Row> */}
-
         <Grid.Row>
           <Grid columns={2}>
             <Grid.Column width={12} textAlign="left">
@@ -179,30 +151,6 @@ export default function CityWeather(props) {
           </Grid>
         </Grid.Row>
 
-        {/* <Grid.Row>
-            <Grid columns={2} >
-              <Grid.Column  verticalAlign ='bottom' textAlign='left'>
-                <Card fluid className="currentWeather">
-                    <Card.Content>
-                        <Card.Header style={{color: 'white', fontSize: '60px', fontWeight: 'bold'}}>
-                        {name}, {stateOrCountry}
-                        </Card.Header>
-                        <Card.Description style={{color: 'white', fontSize: '30px'}}>
-                            {date}
-                        </Card.Description>
-                    </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column  width={8} textAlign='right' verticalAlign ='top'>
-              <Button onClick ={ () => props.history.push('/weather')}>
-                      HOME
-                  </Button>
-
-              </Grid.Column>
-    
-            </Grid>
-</Grid.Row> */}
-
         <Grid.Row>
           <Grid columns={2}>
             <Grid.Row>
@@ -215,7 +163,6 @@ export default function CityWeather(props) {
                           {getWeatherIcon(main)}
                         </Grid.Column>
                         <Grid.Column textAlign="left" verticalAlign="middle">
-                          {/* <div style={{fontSize: '50px', paddingBottom: '20px'}}> */}
                           <div
                             style={{
                               fontSize: "60px",
@@ -223,7 +170,7 @@ export default function CityWeather(props) {
                               fontWeight: 550,
                             }}
                           >
-                            {newTemps.temp}&#176;
+                            {newTemps.temp}&nbsp;&#176;F
                           </div>
                           <div style={{ fontSize: "30px" }}>
                             {descriptionCapitalized}
@@ -241,7 +188,7 @@ export default function CityWeather(props) {
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.2)",
                     borderRadius: "20px",
-                    fontSize: "17px",
+                    fontSize: "20px",
                   }}
                 >
                   <Grid.Row>
@@ -249,7 +196,7 @@ export default function CityWeather(props) {
                       <Card className="current">
                         <Card.Content>
                           <Card.Description>
-                            <div style={{ paddingBottom: "5px" }}>
+                            <div style={{ paddingBottom: "10px" }}>
                               {newTemps.max}&#176;{" "}
                             </div>
                             <div> High</div>
@@ -262,7 +209,7 @@ export default function CityWeather(props) {
                       <Card className="current">
                         <Card.Content>
                           <Card.Description>
-                            <div style={{ paddingBottom: "5px" }}>
+                            <div style={{ paddingBottom: "10px" }}>
                               {wind_speed} mph{" "}
                             </div>
                             <div> Wind</div>
@@ -275,7 +222,7 @@ export default function CityWeather(props) {
                       <Card className="current">
                         <Card.Content>
                           <Card.Description>
-                            <div style={{ paddingBottom: "5px" }}>
+                            <div style={{ paddingBottom: "10px" }}>
                               {sunrise}{" "}
                             </div>
                             <div> Sunrise</div>
@@ -290,7 +237,7 @@ export default function CityWeather(props) {
                       <Card className="current">
                         <Card.Content>
                           <Card.Description>
-                            <div style={{ paddingBottom: "5px" }}>
+                            <div style={{ paddingBottom: "10px" }}>
                               {newTemps.min}&#176;{" "}
                             </div>
                             <div> Low</div>
@@ -302,7 +249,7 @@ export default function CityWeather(props) {
                       <Card className="current">
                         <Card.Content>
                           <Card.Description>
-                            <div style={{ paddingBottom: "5px" }}>
+                            <div style={{ paddingBottom: "10px" }}>
                               {humidity} %{" "}
                             </div>
                             <div> Rain </div>
@@ -314,7 +261,7 @@ export default function CityWeather(props) {
                       <Card className="current">
                         <Card.Content>
                           <Card.Description>
-                            <div style={{ paddingBottom: "5px" }}>
+                            <div style={{ paddingBottom: "10px" }}>
                               {sunset}{" "}
                             </div>
                             <div> Sunset</div>
